@@ -1,0 +1,6 @@
+# Telegram bot config
+# Get the bot-token from @BotFather 
+BOT_TOKEN=12345:example_token
+
+# Get your telegram user-id  from @userinfobot
+ADMIN_ID=987654321
