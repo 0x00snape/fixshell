@@ -6,15 +6,16 @@ _____________________________________________
   <h1>FIXSHELL</h1>
 </div>
 
-Fixshell is a pseudo-reverse shell that combines the ClickFix social engineering technique with a reverse shell using HTTP/S for command polling and Telegram bot as command server. It evades Windows Defender and other signature based security through memory only execution, traffic over standard HTTP/S port and dynamic staging to prevent static signature detection. Fixshell is compatible solely with Windows environments by utilizing PowerShell and is incompatible for Linux or macOS victims.
+Fixshell is a pseudo-reverse shell that combines the ClickFix social engineering technique with a reverse shell using HTTP/S for command polling and Telegram bot as a command server. It evades Windows Defender and sends traffic over standard HTTP/S with persistence mechanism using <code>Windows Task Scheduler</code> [T1053.005](https://attack.mitre.org/techniques/T1053/005/) and storing the payload in Registry <code>HKCU\Environment</code> [T1112](https://attack.mitre.org/techniques/T1112/). Fixshell is compatible solely with Windows environments by utilizing PowerShell and is incompatible for Linux or macOS.
 
 ### Workflow
 | Stage | Action | Description |
 | :--- | :--- | :--- |
-| 1. Landing | GET / | Serves the ClickFix landing page to victim. |
-| 2. Verify | GET /api/ok | Validates the visitor and delivers the Windows PowerShell payload. |
-| 3. Polling | GET /api/v1/:id | Victim retrieves queued commands from server. |
-| 4. Exfiltration | POST /api/v1/:id | Victim sends command results to attacker via Telegram. |
+| 1. Landing | GET / | Serves the ClickFix landing page to victim. Creating cookie <code>_uid</code> to identify Victim. |
+| 2. Hijack | GET /:uuid | Hijack the clipboard with payload and instruct victims on how to infect their own machine. |
+| 3. Staging | POST /:uuid | One time Windows PowerShell payload delivery. |
+| 4. Polling | GET /analytics/v2/:id | Victim retrieves queued commands from server. |
+| 5. Exfiltration | POST /analytics/v2/:id | Victim sends command results to attacker via Telegram. |
 
 <hr/>
 
